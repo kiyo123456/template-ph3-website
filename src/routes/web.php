@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +24,14 @@ Route::get('/', function () {
 Route::get('/website', function () {
     return view('website'); // resources/views/website.blade.phpを探す
 })->name('website');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+Route::get('/quizzes/{id}', [QuizController::class, 'show'])->name('quizzes.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
